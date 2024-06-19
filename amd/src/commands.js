@@ -7,6 +7,11 @@ import {
     icon,
 } from './common';
 
+/**
+ * Add a correction on the current selection.
+ * @param editor
+ * @returns {void}
+ */
 const addCorrection = (editor) => {
     editor.windowManager.open({
         title: 'Add a correction',
@@ -60,37 +65,9 @@ const addCorrection = (editor) => {
             let updated_content = whole_content.replace(current_selection, updated_selection);
             editor.setContent(updated_content);
             api.close();
-
-            //TODO test to check if it works
-            addCssRules();
         }
     });
 }
-
-const addCssRules = () => {
-    const style = document.createElement('style');
-    style.innerHTML = `
-        .tiny_corrections {
-            border-bottom: 2px dashed #ff0000!important;
-        }
-        
-        .tiny_corrections sup {
-            color: #ff0000;
-            border: none;
-            text-transform: uppercase;
-        }
-        
-        .tiny_corrections_comment {
-            display: none;
-        }
-        
-        .tiny_corrections:hover .tiny_corrections_comment {
-            display: inline;
-        }
-    `;
-    document.head.appendChild(style);
-}
-
 
 
 export const getSetup = async() => {
