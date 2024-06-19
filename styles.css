@@ -1,0 +1,26 @@
+.tiny_corrections {
+    border-bottom: 2px dashed #ff0000!important;
+}
+
+.tiny_corrections sup {
+    color: #ff0000;
+    border: none;
+    text-transform: uppercase;
+}
+
+.tiny_corrections_comment {
+    border: 1px #cccccc solid;
+    background-color: #eeee00;
+    color: #000000;
+    padding: 0.1em 0.5em;
+    margin: 0 0.1em;
+    display: none;
+    font-family: monospace;
+    font-size: 0.8em;
+}
+
+
+.tiny_corrections:hover .tiny_corrections_comment {
+    display: inline;
+}
+
