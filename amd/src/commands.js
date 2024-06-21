@@ -1,18 +1,12 @@
-import {getButtonImage} from 'editor_tiny/utils';
 import {get_string as getString} from 'core/str';
-import {
-    component,
-    startdemoButtonName,
-    startdemoMenuItemName,
-    icon,
-} from './common';
+import {component} from './common';
 
 /**
  * Add a correction on the current selection.
- * @param editor
+ * @param {editor} editor
  * @returns {void}
  */
-const addCorrection = (editor) => {
+function addCorrection(editor) {
     editor.windowManager.open({
         title: 'Add a correction',
         body: {
@@ -23,11 +17,11 @@ const addCorrection = (editor) => {
                     name: 'correction_type',
                     label: 'Correction type',
                     items: [
-                        { text: 'None', value: 'none' },
-                        { text: 'Spelling', value: 'spelling' },
-                        { text: 'Grammar', value: 'grammar' },
-                        { text: 'Punctuation', value: 'punctuation' },
-                        { text: 'Other', value: 'other' }
+                        {text: 'None', value: 'none'},
+                        {text: 'Spelling', value: 'spelling'},
+                        {text: 'Grammar', value: 'grammar'},
+                        {text: 'Punctuation', value: 'punctuation'},
+                        {text: 'Other', value: 'other'}
                     ]
                 },
                 {
@@ -52,7 +46,7 @@ const addCorrection = (editor) => {
             const correction_type = data.correction_type;
             const correction_comment = data.correction_comment;
 
-            let whole_content = editor.getContent({ format: 'html' });
+            let whole_content = editor.getContent({format: 'html'});
             let current_selection = editor.selection.getContent({});
             let updated_selection =
                 `<span class="tiny_corrections">
@@ -69,40 +63,41 @@ const addCorrection = (editor) => {
     });
 }
 
+/**
+ * Remove the correction on the current selection or cursor position
+ * @param {editor} editor
+ */
+function removeCorrection(editor) {
+    let selection = editor.selection.getNode();
+    if (selection.classList.contains('tiny_corrections')) {
+        selection.querySelector('.tiny_corrections_correction').remove();
+        selection.attributes.removeNamedItem('class');
+    }
 
-export const getSetup = async() => {
+}
+
+export const getSetup = async () => {
     const [
-        startdemoButtonNameTitle,
-        startdemoMenuItemNameTitle,
-        buttonImage,
+        addCorrectionButtonTitle,
+        removeCorrectionButtonTitle
     ] = await Promise.all([
-        getString('button_startdemo', component),
-        getString('menuitem_startdemo', component),
-        getButtonImage('icon', component),
+        getString('button_addcorrection', component),
+        getString('button_removecorrection', component),
     ]);
 
-    return (editor) =>
+    return (editor) => {
 
-
-    {
-        // Register the Moodle SVG as an icon suitable for use as a TinyMCE toolbar button.
-        editor.ui.registry.addIcon(icon, buttonImage.html);
-
-        // Register the startdemo Toolbar Button.
-        editor.ui.registry.addButton(startdemoButtonName, {
-            icon,
+        // Register the add correction Toolbar Button.
+        editor.ui.registry.addButton(addCorrectionButtonTitle, {
+            icon: 'comment-add',
             tooltip: "Add correction",
             onAction: () => addCorrection(editor)
         });
 
-        window.console.log(editor)
-
-        // Add the startdemo Menu Item.
-        // This allows it to be added to a standard menu, or a context menu.
-        editor.ui.registry.addMenuItem(startdemoMenuItemName, {
-            icon,
-            text: "Add correction",
-            onAction: () => addCorrection(editor)
+        editor.ui.registry.addButton(removeCorrectionButtonTitle, {
+            icon: 'comment',
+            tooltip: "Remove correction",
+            onAction: () => removeCorrection(editor)
         });
     };
 };

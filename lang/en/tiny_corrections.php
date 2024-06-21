@@ -26,3 +26,6 @@
 defined('MOODLE_INTERNAL') || die();
 
 $string['pluginname'] = 'Tiny corrections';
+$string['button_addcorrection'] = 'Add correction';
+$string['button_removecorrection'] = 'Remove correction';
+

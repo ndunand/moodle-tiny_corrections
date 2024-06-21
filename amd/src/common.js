@@ -25,7 +25,8 @@ const component = 'tiny_corrections';
 export default {
     component,
     pluginName: `${component}/plugin`,
-    icon: component,
-    startdemoButtonName: `${component}_startdemo`,
-    startdemoMenuItemName: `${component}_startdemo`,
+    addIcon: 'add',
+    removeIcon: 'remove',
+    addCorrectionButtonName: `${component}_addCorrection`,
+    removeCorrectionButtonName: `${component}_removeCorrection`,
 };
