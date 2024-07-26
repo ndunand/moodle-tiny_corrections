@@ -28,4 +28,29 @@ defined('MOODLE_INTERNAL') || die();
 $string['pluginname'] = 'Tiny corrections';
 $string['button_addcorrection'] = 'Add correction';
 $string['button_removecorrection'] = 'Remove correction';
-
+$string['settings'] = 'Inline text corrections settings';
+$string['corrtypes'] = 'Correction types';
+$string['corrtypes_desc'] = 'Please enter one correction type per line, in the form "abbreviation = description".<br><strong>Warning:</strong> each abbreviation must be unique!';
+$string['corrtypes_default'] = '
+a = plurialization
+c = conjugation
+d = determinant
+g = grammar/syntax
+m = missing word(s)
+o = orthograph
+p = preposition
+t = tense
+v = vocabulary
+... = punctuation
+? = other
+';
+$string['addcomment'] = 'Add';
+$string['corrtype'] = 'Correction type';
+$string['corrtext'] = 'Comment';
+$string['dialogtitle'] = 'Add/modify a correction';
+$string['fulltexttitle'] = 'Text with correction marks';
+$string['addmark'] = 'Add a correction mark';
+$string['removemark'] = 'Remove this correction mark';
+$string['displayfulltext'] = 'Display text with correction marks';
+$string['privacy:metadata'] = 'The atto_corrections plugin does not store any personal data.';
+$string['corrections:canmarkup'] = 'Use markup';
