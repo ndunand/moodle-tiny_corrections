@@ -27,6 +27,4 @@ export default {
     pluginName: `${component}/plugin`,
     addIcon: 'add',
     removeIcon: 'remove',
-    addCorrectionButtonName: `${component}_addCorrection`,
-    removeCorrectionButtonName: `${component}_removeCorrection`,
 };

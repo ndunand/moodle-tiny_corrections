@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - https://moodle.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -15,14 +15,25 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Settings that allow configuring various tiny Font Color plugin features.
+ * Adds admin settings for the plugin.
  *
  * @package     tiny_corrections
+ * @category    admin
  * @copyright   2024 Nicolas Alexandropoulos <nicolas.alexandropoulos@unil.ch>
-
- * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @license     https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 defined('MOODLE_INTERNAL') || die();
+
+$ADMIN->add('editortiny', new admin_category('tiny_corrections', 'Tiny corrections'));
+$settings = new admin_settingpage('tiny_corrections_settings', 'Tiny corrections');
+
+if ($ADMIN->fulltree) {
+    $name = new lang_string('corrtypes', 'tiny_corrections');
+    $desc = new lang_string('corrtypes_desc', 'tiny_corrections');
+    $default = new lang_string('corrtypes_default', 'tiny_corrections');
+    $setting = new admin_setting_configtextarea('tiny_corrections/corrtypes', $name, $desc, $default);
+    $settings->add($setting);
+}
 
 

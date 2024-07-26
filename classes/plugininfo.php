@@ -16,7 +16,8 @@ class plugininfo extends plugin implements plugin_with_configuration {
         return [
             // Your values go here.
             // These will be mapped to a namespaced EditorOption in Tiny.
-            'myFirstProperty' => 'TODO Calculate your values here',
+            'corrtypes' => get_config('tiny_corrections', 'corrtypes'),
+            'disabled' => !has_capability('atto/corrections:canmarkup', $context),
         ];
     }
 }

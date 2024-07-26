@@ -1,5 +1,6 @@
 import {get_string as getString} from 'core/str';
 import {component} from './common';
+import {getCorrTypes, isDisabled} from "./options";
 
 /**
  * Add a correction on the current selection.
@@ -7,6 +8,14 @@ import {component} from './common';
  * @returns {void}
  */
 function addCorrection(editor) {
+    let correction_types = getCorrTypes(editor);
+    let disabled = isDisabled(editor);
+
+    let correction_types_array = correction_types.split('\n').map((line) => {
+        let [value, text] = line.split('=');
+        return {text: text, value: value};
+    });
+
     editor.windowManager.open({
         title: 'Add a correction',
         body: {
@@ -16,13 +25,7 @@ function addCorrection(editor) {
                     type: 'selectbox',
                     name: 'correction_type',
                     label: 'Correction type',
-                    items: [
-                        {text: 'None', value: 'none'},
-                        {text: 'Spelling', value: 'spelling'},
-                        {text: 'Grammar', value: 'grammar'},
-                        {text: 'Punctuation', value: 'punctuation'},
-                        {text: 'Other', value: 'other'}
-                    ]
+                    items: correction_types_array
                 },
                 {
                     type: 'textarea',
