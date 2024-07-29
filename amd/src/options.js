@@ -2,7 +2,6 @@ import {getPluginOptionName} from 'editor_tiny/options';
 import {pluginName} from './common';
 // Helper variables for the option names.
 const corrtypes = getPluginOptionName(pluginName, 'corrtypes');
-const disabled = getPluginOptionName(pluginName, 'disabled');
 /**
  * Options registration function.
  *
@@ -15,10 +14,6 @@ export const register = (editor) => {
     editor.options.register(corrtypes, {
         processor: 'string',
     });
-
-    editor.options.register(disabled, {
-        processor: 'boolean'
-    });
 };
 
 /**
@@ -28,4 +23,3 @@ export const register = (editor) => {
  * @returns {object} The value of the myFirstProperty option
  */
 export const getCorrTypes = (editor) => editor.options.get(corrtypes);
-export const isDisabled = (editor) => editor.options.get(disabled);

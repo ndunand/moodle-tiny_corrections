@@ -1,6 +1,6 @@
 import {get_string as getString} from 'core/str';
 import {component} from './common';
-import {getCorrTypes, isDisabled} from "./options";
+import {getCorrTypes} from "./options";
 
 /**
  * Add a correction on the current selection.
@@ -9,7 +9,6 @@ import {getCorrTypes, isDisabled} from "./options";
  */
 function addCorrection(editor) {
     let correction_types = getCorrTypes(editor);
-    let disabled = isDisabled(editor);
 
     let correction_types_array = correction_types.split('\n').map((line) => {
         let [value, text] = line.split('=');
