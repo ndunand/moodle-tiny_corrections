@@ -15,7 +15,7 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Atto text editor integration version file.
+ * tiny text editor integration version file.
  *
  * @package    tiny_corrections
  * @copyright  2014 Université de Lausanne
