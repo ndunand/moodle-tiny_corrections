@@ -26,7 +26,7 @@ class plugininfo extends plugin implements plugin_with_configuration {
         array $fpoptions,
         ?\editor_tiny\editor $editor = null
     ): bool {
-        return has_capability('atto/corrections:canmarkup', $context);
+        return has_capability('tiny/corrections:canmarkup', $context);
     }
 
 }
