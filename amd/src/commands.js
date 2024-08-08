@@ -9,6 +9,7 @@ import {getCorrTypes} from "./options";
  */
 function addCorrection(editor) {
     let correction_types = getCorrTypes(editor);
+    correction_types = correction_types.replace(/\n$/, '');
 
     let correction_types_array = correction_types.split('\n').map((line) => {
         let [value, text] = line.split('=');
