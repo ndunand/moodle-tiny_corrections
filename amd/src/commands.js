@@ -89,8 +89,8 @@ export const getSetup = async () => {
     ]);
 
     return (editor) => {
+        editor.contentCSS.push(window.M.cfg.wwwroot + '/lib/editor/tiny/plugins/corrections/styles.css');
 
-        // Register the add correction Toolbar Button.
         editor.ui.registry.addButton('add_correction', {
             icon: 'comment-add',
             tooltip: addCorrectionButtonTitle,
