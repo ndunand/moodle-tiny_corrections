@@ -1,10 +1,9 @@
 import {addToolbarButtons} from 'editor_tiny/utils';
 
 const getToolbarConfiguration = (instanceConfig) => {
-    let toolbar = instanceConfig.toolbar;
-    toolbar = addToolbarButtons(toolbar, 'content', [
-        'Add correction',
-        'Remove correction'
+    let toolbar = addToolbarButtons(instanceConfig.toolbar, 'content', [
+        'add_correction',
+        'remove_correction'
     ]);
 
     return toolbar;

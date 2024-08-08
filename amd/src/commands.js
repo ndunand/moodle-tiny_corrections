@@ -90,15 +90,15 @@ export const getSetup = async () => {
     return (editor) => {
 
         // Register the add correction Toolbar Button.
-        editor.ui.registry.addButton(addCorrectionButtonTitle, {
+        editor.ui.registry.addButton('add_correction', {
             icon: 'comment-add',
-            tooltip: "Add correction",
+            tooltip: addCorrectionButtonTitle,
             onAction: () => addCorrection(editor)
         });
 
-        editor.ui.registry.addButton(removeCorrectionButtonTitle, {
+        editor.ui.registry.addButton('remove_correction', {
             icon: 'comment',
-            tooltip: "Remove correction",
+            tooltip: removeCorrectionButtonTitle,
             onAction: () => removeCorrection(editor)
         });
     };
