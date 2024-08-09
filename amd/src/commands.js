@@ -26,19 +26,37 @@ import {get_string as getString} from 'core/str';
 import {component} from './common';
 import {getCorrTypes} from "./options";
 
+
+/**
+ * Update the editor content with the correction type and comment.
+ * @param {string} data
+ * @param {editor} editor
+ */
+function updateEditorTextContent(data, editor) {
+    const correction_type = data.correction_type;
+    const correction_comment = data.correction_comment;
+
+    let whole_content = editor.getContent({format: 'html'});
+    let current_selection = editor.selection.getContent({});
+    let updated_selection =
+        `<span class="tiny_corrections">
+                    ${current_selection}
+                    <span class="tiny_corrections_correction">
+                        <sup title="${current_selection}">${correction_type}</sup>
+                        <span class="tiny_corrections_comment">${correction_comment}</span>
+                    </span>
+                </span>`;
+    let updated_content = whole_content.replace(current_selection, updated_selection);
+    editor.setContent(updated_content);
+}
+
 /**
  * Add a correction on the current selection.
  * @param {editor} editor
  * @returns {void}
  */
 function addCorrection(editor) {
-    let correction_types = getCorrTypes(editor);
-    correction_types = correction_types.replace(/\n$/, '');
-
-    let correction_types_array = correction_types.split('\n').map((line) => {
-        let [value, text] = line.split('=');
-        return {text: text, value: value};
-    });
+    let correction_types_array = parseCorrectionTypes(editor);
 
     editor.windowManager.open({
         title: 'Add a correction',
@@ -70,24 +88,27 @@ function addCorrection(editor) {
         },
         onSubmit: (api) => {
             const data = api.getData();
-            const correction_type = data.correction_type;
-            const correction_comment = data.correction_comment;
-
-            let whole_content = editor.getContent({format: 'html'});
-            let current_selection = editor.selection.getContent({});
-            let updated_selection =
-                `<span class="tiny_corrections">
-                    ${current_selection}
-                    <span class="tiny_corrections_correction">
-                        <sup title="${current_selection}">${correction_type}</sup>
-                        <span class="tiny_corrections_comment">${correction_comment}</span>
-                    </span>
-                </span>`;
-            let updated_content = whole_content.replace(current_selection, updated_selection);
-            editor.setContent(updated_content);
+            updateEditorTextContent(data, editor);
             api.close();
         }
     });
+}
+
+/**
+ * Fetches the correction types from the server and parses them into an array of objects.
+ * @param {editor} editor
+ * @returns {{text: *, value: *}[]}
+ */
+function parseCorrectionTypes(editor) {
+    let correction_types = getCorrTypes(editor);
+    correction_types = correction_types.replace(/\n$/, '');
+
+    let correction_types_array = correction_types.split('\n').map((line) => {
+        let [value, text] = line.split('=');
+        return {text: text, value: value};
+    });
+
+    return correction_types_array;
 }
 
 /**
