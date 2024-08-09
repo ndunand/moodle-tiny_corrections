@@ -15,13 +15,14 @@
 // along with Moodle.  If not, see <https://www.gnu.org/licenses/>.
 
 /**
- * Plugin strings are defined here.
+ * Common values helper for the Moodle tiny_corrections plugin.
  *
- * @package     tiny_corrections
- * @category    string
- * @copyright   2024 Nicolas Alexandropoulos <nicolas.alexandropoulos@unil.ch>
- * @license     https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @module      tiny_corrections
+ * @copyright   2024 Université de Lausanne
+ * @author      Nicolas Alexandropoulos <nicolas.alexandropoulos@unil.ch>
+ * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
+
 
 defined('MOODLE_INTERNAL') || die();
 

@@ -17,9 +17,11 @@
  * Common values helper for the Moodle tiny_corrections plugin.
  *
  * @module      tiny_corrections
- * @copyright   2024 Nicolas Alexandropoulos <nicolas.alexandropoulos@unil.ch>
+ * @copyright   2024 Université de Lausanne
+ * @author      Nicolas Alexandropoulos <nicolas.alexandropoulos@unil.ch>
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
+
 const component = 'tiny_corrections';
 
 export default {

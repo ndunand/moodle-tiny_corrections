@@ -12,15 +12,15 @@
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with Moodle.  If not, see <https://www.gnu.org/licenses/>.
 
 /**
- * Adds admin settings for the plugin.
+ * Common values helper for the Moodle tiny_corrections plugin.
  *
- * @package     tiny_corrections
- * @category    admin
- * @copyright   2024 Nicolas Alexandropoulos <nicolas.alexandropoulos@unil.ch>
- * @license     https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @module      tiny_corrections
+ * @copyright   2024 Université de Lausanne
+ * @author      Nicolas Alexandropoulos <nicolas.alexandropoulos@unil.ch>
+ * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 defined('MOODLE_INTERNAL') || die();
