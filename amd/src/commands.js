@@ -106,23 +106,31 @@ function removeCorrection(editor) {
 export const getSetup = async () => {
     const [
         addCorrectionButtonTitle,
-        removeCorrectionButtonTitle
+        removeCorrectionButtonTitle,
     ] = await Promise.all([
         getString('button_addcorrection', component),
         getString('button_removecorrection', component),
     ]);
 
+    let addIcon = await fetch(window.M.cfg.wwwroot + "/lib/editor/tiny/plugins/corrections/pix/add.svg")
+        .then((response) => response.text());
+    let removeIcon = await fetch(window.M.cfg.wwwroot + "/lib/editor/tiny/plugins/corrections/pix/remove.svg")
+        .then((response) => response.text());
+
     return (editor) => {
+        editor.ui.registry.addIcon('commentAdd', addIcon);
+        editor.ui.registry.addIcon('commentRemove', removeIcon);
+
         editor.contentCSS.push(window.M.cfg.wwwroot + '/lib/editor/tiny/plugins/corrections/styles.css');
 
         editor.ui.registry.addButton('add_correction', {
-            icon: 'comment-add',
+            icon: 'commentAdd',
             tooltip: addCorrectionButtonTitle,
             onAction: () => addCorrection(editor)
         });
 
         editor.ui.registry.addButton('remove_correction', {
-            icon: 'comment',
+            icon: 'commentRemove',
             tooltip: removeCorrectionButtonTitle,
             onAction: () => removeCorrection(editor)
         });
