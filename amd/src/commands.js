@@ -27,8 +27,42 @@ import {component} from './common';
 import {getCorrTypes} from "./options";
 
 
+export const getSetup = async () => {
+    const [
+        addCorrectionButtonTitle,
+        removeCorrectionButtonTitle,
+    ] = await Promise.all([
+        getString('button_addcorrection', component),
+        getString('button_removecorrection', component),
+    ]);
+
+    let addIcon = await fetch(window.M.cfg.wwwroot + "/lib/editor/tiny/plugins/corrections/pix/add.svg")
+        .then((response) => response.text());
+    let removeIcon = await fetch(window.M.cfg.wwwroot + "/lib/editor/tiny/plugins/corrections/pix/remove.svg")
+        .then((response) => response.text());
+
+    return (editor) => {
+        editor.ui.registry.addIcon('commentAdd', addIcon);
+        editor.ui.registry.addIcon('commentRemove', removeIcon);
+
+        editor.contentCSS.push(window.M.cfg.wwwroot + '/lib/editor/tiny/plugins/corrections/styles.css');
+
+        editor.ui.registry.addButton('add_correction', {
+            icon: 'commentAdd',
+            tooltip: addCorrectionButtonTitle,
+            onAction: () => openCorrectionModal(editor)
+        });
+
+        editor.ui.registry.addButton('remove_correction', {
+            icon: 'commentRemove',
+            tooltip: removeCorrectionButtonTitle,
+            onAction: () => removeCorrection(editor)
+        });
+    };
+};
+
 /**
- * Update the editor content with the correction type and comment.
+ * Updates the editor content with the correction type and comment.
  * @param {string} data
  * @param {editor} editor
  */
@@ -51,11 +85,11 @@ function updateEditorTextContent(data, editor) {
 }
 
 /**
- * Add a correction on the current selection.
+ * Opens the correction modal.
  * @param {editor} editor
  * @returns {void}
  */
-function addCorrection(editor) {
+function openCorrectionModal(editor) {
     let correction_types_array = parseCorrectionTypes(editor);
 
     editor.windowManager.open({
@@ -112,7 +146,7 @@ function parseCorrectionTypes(editor) {
 }
 
 /**
- * Remove the correction on the current selection or cursor position
+ * Removes the correction on the current selection or cursor position
  * @param {editor} editor
  */
 function removeCorrection(editor) {
@@ -123,37 +157,3 @@ function removeCorrection(editor) {
     }
 
 }
-
-export const getSetup = async () => {
-    const [
-        addCorrectionButtonTitle,
-        removeCorrectionButtonTitle,
-    ] = await Promise.all([
-        getString('button_addcorrection', component),
-        getString('button_removecorrection', component),
-    ]);
-
-    let addIcon = await fetch(window.M.cfg.wwwroot + "/lib/editor/tiny/plugins/corrections/pix/add.svg")
-        .then((response) => response.text());
-    let removeIcon = await fetch(window.M.cfg.wwwroot + "/lib/editor/tiny/plugins/corrections/pix/remove.svg")
-        .then((response) => response.text());
-
-    return (editor) => {
-        editor.ui.registry.addIcon('commentAdd', addIcon);
-        editor.ui.registry.addIcon('commentRemove', removeIcon);
-
-        editor.contentCSS.push(window.M.cfg.wwwroot + '/lib/editor/tiny/plugins/corrections/styles.css');
-
-        editor.ui.registry.addButton('add_correction', {
-            icon: 'commentAdd',
-            tooltip: addCorrectionButtonTitle,
-            onAction: () => addCorrection(editor)
-        });
-
-        editor.ui.registry.addButton('remove_correction', {
-            icon: 'commentRemove',
-            tooltip: removeCorrectionButtonTitle,
-            onAction: () => removeCorrection(editor)
-        });
-    };
-};
