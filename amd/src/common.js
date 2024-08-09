@@ -26,7 +26,5 @@ const component = 'tiny_corrections';
 
 export default {
     component,
-    pluginName: `${component}/plugin`,
-    addIcon: 'add',
-    removeIcon: 'remove',
+    pluginName: `${component}/plugin`
 };
