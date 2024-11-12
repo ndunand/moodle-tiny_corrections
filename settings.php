@@ -25,8 +25,8 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-$ADMIN->add('editortiny', new admin_category('tiny_corrections', 'Tiny corrections'));
-$settings = new admin_settingpage('tiny_corrections_settings', 'Tiny corrections');
+$ADMIN->add('editortiny', new admin_category('tiny_corrections', get_string('pluginname', 'tiny_corrections')));
+$settings = new admin_settingpage('tiny_corrections_settings', get_string('settings', 'tiny_corrections'));
 
 if ($ADMIN->fulltree) {
     $name = new lang_string('corrtypes', 'tiny_corrections');

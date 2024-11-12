@@ -89,24 +89,34 @@ function updateEditorTextContent(data, editor) {
  * @param {editor} editor
  * @returns {void}
  */
-function openCorrectionModal(editor) {
+async function openCorrectionModal(editor) {
+    const [
+        addCorrectionButtonTitle,
+        correctionTypeTitle,
+        commentTitle
+    ] = await Promise.all([
+        getString('button_addcorrection', component),
+        getString('corrtype', component),
+        getString('corrtext', component),
+    ]);
+
     let correction_types_array = parseCorrectionTypes(editor);
 
     editor.windowManager.open({
-        title: 'Add a correction',
+        title: addCorrectionButtonTitle,
         body: {
             type: 'panel',
             items: [
                 {
                     type: 'selectbox',
                     name: 'correction_type',
-                    label: 'Correction type',
+                    label: correctionTypeTitle,
                     items: correction_types_array
                 },
                 {
                     type: 'textarea',
                     name: 'correction_comment',
-                    label: 'Comment'
+                    label: commentTitle
                 }
             ]
         },
