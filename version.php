@@ -27,9 +27,9 @@
 defined('MOODLE_INTERNAL') || die();
 
 $plugin->component = 'tiny_corrections';
-$plugin->release = '1.0 RC';
-$plugin->version = 2024080900;
+$plugin->release = '1.0';
+$plugin->version = 2024080901;
 $plugin->requires = 2023100900; // Moodle 4.3
-$plugin->maturity = MATURITY_RC;
-$plugin->supported = [403, 404];
+$plugin->maturity = MATURITY_STABLE;
+$plugin->supported = [403, 405];
 
