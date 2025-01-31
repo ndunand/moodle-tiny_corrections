@@ -70,7 +70,6 @@ function updateEditorTextContent(data, editor) {
     const correction_type = data.correction_type;
     const correction_comment = data.correction_comment;
 
-    let whole_content = editor.getContent({format: 'html'});
     let current_selection = editor.selection.getContent({});
     let updated_selection =
         `<span class="tiny_corrections">
@@ -80,8 +79,7 @@ function updateEditorTextContent(data, editor) {
                         <span class="tiny_corrections_comment">${correction_comment}</span>
                     </span>
                 </span>`;
-    let updated_content = whole_content.replace(current_selection, updated_selection);
-    editor.setContent(updated_content);
+    editor.selection.setContent(updated_selection);
 }
 
 /**
